@@ -13,13 +13,9 @@ import {
 import { useState } from "react";
 
 type SlideImageProps = {
-  imageList: {
-    url: string;
-    caption: string;
-  }[];
+  images: string[];
 };
-
-export default function ImageSlider({ imageList }: Readonly<SlideImageProps>) {
+export default function ImageSlider({ images }: Readonly<SlideImageProps>) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -28,14 +24,14 @@ export default function ImageSlider({ imageList }: Readonly<SlideImageProps>) {
     setIsModalOpen(true);
   };
   const renderImages = () => {
-    return imageList.map((imageLink, i) => {
+    return images.map((imageLink, i) => {
       return (
         <Image
           onClick={() => openModalSlider(i)}
-          src={imageLink.url}
+          src={imageLink}
           boxShadow="xl"
           borderRadius="xl"
-          key={imageLink.url}
+          key={imageLink}
         />
       );
     });
@@ -44,7 +40,7 @@ export default function ImageSlider({ imageList }: Readonly<SlideImageProps>) {
     <Slide
       defaultIndex={currentImageIndex}
       infinite={false}
-      arrows={imageList.length > 1}
+      arrows={images.length > 1}
       autoplay={false}
     >
       {renderImages()}
