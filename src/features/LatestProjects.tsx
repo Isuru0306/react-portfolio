@@ -1,3 +1,4 @@
+import { Badge } from "@/components/Badge";
 import ImageSlider from "@/components/ImageSlider/ImageSlider";
 import { Box, Flex, Heading, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import { useState } from "react";
@@ -48,6 +49,7 @@ type renderProjectProps = {
   images: string[];
   title: string;
   description: string;
+  technologies: string[];
 };
 export function LatestProjects() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -59,6 +61,7 @@ export function LatestProjects() {
     images,
     title,
     description,
+    technologies,
   }: renderProjectProps) => {
     return (
       <WrapItem key={id} flexDir={"column"}>
@@ -75,6 +78,13 @@ export function LatestProjects() {
           {title}
         </Heading>
         <Text>{description}</Text>
+        <Wrap mt={2} maxW={350}>
+          {technologies.map((tech) => (
+            <WrapItem key={tech}>
+              <Badge bg={tech}>{tech}</Badge>
+            </WrapItem>
+          ))}
+        </Wrap>
       </WrapItem>
     );
   };

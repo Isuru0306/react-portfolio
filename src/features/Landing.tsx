@@ -1,10 +1,35 @@
-import { Badge, Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Badge as ChakraBadge,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import humanImg from "@/assets/images/human.png";
 
 import { useTranslation } from "react-i18next";
-
+import { Badge } from "@/components/Badge";
+const SKILLS = [
+  { label: "React" },
+  { label: "Redux" },
+  { label: "Typescript" },
+  { label: "Node.JS" },
+];
 export function Landing() {
   const { t } = useTranslation("home");
+
+  const badgeList = (
+    <Wrap mt={6}>
+      {SKILLS.map((skill) => (
+        <WrapItem key={skill.label}>
+          <Badge bg={skill.label}>{skill.label}</Badge>
+        </WrapItem>
+      ))}
+    </Wrap>
+  );
 
   const leftSection = (
     <Box>
@@ -25,14 +50,15 @@ export function Landing() {
         </Text>{" "}
         <br /> {t("location")}
       </Text>
+      {badgeList}
     </Box>
   );
 
   const badgeExperience = (
-    <Badge bg="primary.light" borderRadius={7} p={3} textAlign="center">
+    <ChakraBadge bg="primary.light" borderRadius={7} p={3} textAlign="center">
       <Text fontSize="xl">{new Date().getFullYear() - 2022}</Text>
       <Text>{t("yearsExp")}</Text>
-    </Badge>
+    </ChakraBadge>
   );
   const rightSection = (
     <Box mt={{ base: 10, md: 0 }}>
