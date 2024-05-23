@@ -13,7 +13,13 @@ import {
 import { useState } from "react";
 
 type SlideImageProps = {
-  images: string[];
+  images: {
+    type: string;
+    lastModifiedTS: number;
+    name: string;
+    downloadURL: string;
+    ref: string;
+  }[];
 };
 export default function ImageSlider({ images }: Readonly<SlideImageProps>) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,10 +34,10 @@ export default function ImageSlider({ images }: Readonly<SlideImageProps>) {
       return (
         <Image
           onClick={() => openModalSlider(i)}
-          src={imageLink}
+          src={imageLink.downloadURL}
           boxShadow="xl"
           borderRadius="xl"
-          key={imageLink}
+          key={imageLink.ref}
         />
       );
     });
